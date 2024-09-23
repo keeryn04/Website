@@ -6,6 +6,7 @@
     <meta name="description" content="An HTML file for Keeryn's Movie Matching System">
     <meta name="author" content="Keeryn Johnson">
     <link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="styles_movie.css">
     <link rel="stylesheet" href="styles.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
@@ -27,13 +28,15 @@
         <section class="movie-info">
             <h2><u>My Movie Matching System</u></h2>
             <p>Enter a movie title and get details about that movie such as director, 
-               cast, ratings, and more! Add movies to your list to find similar films! 
+               cast, ratings, and more! Just select a movie and scroll down to see more. 
+               Add movies to your list to find similar films! 
                All credit for API goes to Brian Fritz for OMDb API</p>
         </section>
         <section class="movie-data">
             <input id="searchbar"class="movie-search" type="text" placeholder="Search your Movie Here">
             <ul id="movie-list"></ul>
         </section>
+        <section id="movie-details" class="movie-details"></section>
     </main>
 
     <footer class="footer-container">

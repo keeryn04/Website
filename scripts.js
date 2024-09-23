@@ -35,60 +35,43 @@ async function getDataID(id) {
 }
 
 async function populateData() {
-    //Takes search bar input, fetches data, makes movie list
-    let input = document.getElementById('searchbar').value
+    let input = document.getElementById('searchbar').value;
     input = input.toLowerCase();
 
     let data = await getData(input);
     let movieList = document.getElementById('movie-list');
 
-    //Clears previous list and establishes list of movies
     movieList.innerHTML = '';
-    if (data.Search.length > 0) {
-        data.Search.forEach(async movie => {
-            console.log(movie);
-            let item = document.createElement('li'); //Make new item for movie
-            item.className = 'movie-item';
+    if (data.Search && data.Search.length > 0) {
+        data.Search.forEach(movie => {
+            const listItem = document.createElement("li");
+            listItem.classList.add("movie-item");
 
-            //Display title of movie in list, add event handler for onclick
-            let titleElement = document.createElement('div'); 
-            titleElement.className = 'movie-title';
-            titleElement.innerHTML = movie.Title;
-            titleElement.addEventListener('click', () => toggleDetails(movie.imdbID)); 
+            const posterImg = document.createElement("img");
+            posterImg.src = movie.Poster !== "N/A" ? movie.Poster : "../images/no-image-icon.png";
+            posterImg.alt = `${movie.Title} poster`;
+            posterImg.classList.add("movie-poster");
 
-            //Details of each movie for dropdown
-            let detailsElement = document.createElement('div');
-            detailsElement.className = 'movie-details';
-            detailsElement.id = `details-${movie.imdbID}`;
+            const titleText = document.createElement("p");
+            titleText.textContent = movie.Title;
+            titleText.classList.add("movie-title");
 
-            let movieData = await getDataID(movie.imdbID); //Needed as search for title doesn't have all data required
+            listItem.addEventListener('click', async () => {
+                const details = await getDataID(movie.imdbID);
+                showMovieDetails(details);
+            });
 
-            detailsElement.innerHTML = `
-                <div id="details">
-                    <h2>${movie.Title}</h2>
-                    <p><strong>Year:</strong> ${movie.Year}</p>
-                    <p><strong>Genre:</strong> ${movieData.Genre}</p>
-                    <p><strong>Director:</strong> ${movieData.Director}</p>
-                    <p><strong>Cast:</strong> ${movieData.Actors}</p>
-                    <p><strong>Plot:</strong> ${movieData.Plot}</p>
-                    <p><strong>Rating:</strong> ${movieData.imdbRating}/10</p>
-                    <img src="${movie.Poster}" alt="${movie.Title}" style="width: 200px;">
-                </div>
-            `;
-
-            //Add item to list of titles and details, and add to overall movie list
-            item.appendChild(titleElement);
-            item.appendChild(detailsElement);
-            detailsElement.style.display = 'none';
-            movieList.appendChild(item);
+            listItem.appendChild(posterImg);
+            listItem.appendChild(titleText);
+            movieList.appendChild(listItem);
         });
     } else {
-        movieList.innerHTML = 'No movies found.';
+        movieList.innerHTML = `<li>No movies found</li>`;
     }
 }
 
-function toggleDetails(imdbID) {
-    //Used for movie dropdown, click on title for more details
+
+function toggleDetails(imdbID) { //Click poster for more details
     let detailsElement = document.getElementById(`details-${imdbID}`);
     if (detailsElement.style.display === 'none' || detailsElement.style.display === '') {
         detailsElement.style.display = 'block';
@@ -97,7 +80,23 @@ function toggleDetails(imdbID) {
     }
 }
 
-//Input for search bar triggers movie search
+function showMovieDetails(details) {
+    const detailsContainer = document.getElementById('movie-details');
+    detailsContainer.innerHTML = `
+        <h2>${details.Title}</h2>
+        <img src="${details.Poster !== "N/A" ? details.Poster : "../images/no-image-icon.png"}" alt="${details.Title} poster">
+        <p><strong>Director:</strong> ${details.Director}</p>
+        <p><strong>Cast:</strong> ${details.Actors}</p>
+        <p><strong>Plot:</strong> ${details.Plot}</p>
+        <p><strong>Rating:</strong> ${details.imdbRating}</p>
+        <p><strong>Released:</strong> ${details.Released}</p>
+        <p><strong>Genre:</strong> ${details.Genre}</p>
+        <p><strong>Runtime:</strong> ${details.Runtime}</p>
+    `;
+}
+
+
+//Input for search triggers movie search
 document.getElementById('searchbar').addEventListener('input', async () => {
     await populateData(); 
 });
