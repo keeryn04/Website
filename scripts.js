@@ -35,15 +35,15 @@ async function getDataID(id) {
 }
 
 async function populateData() {
-    let input = document.getElementById('searchbar').value;
+    let input = document.getElementById('searchbar').value; //Take user search
     input = input.toLowerCase();
 
     let data = await getData(input);
-    let movieList = document.getElementById('movie-list');
+    let movieList = document.getElementById('movie-list'); //List of movies returned from API
 
     movieList.innerHTML = '';
     if (data.Search && data.Search.length > 0) {
-        data.Search.forEach(movie => {
+        data.Search.forEach(movie => { //Take each movie, make a list element with the movie poster and the title
             const listItem = document.createElement("li");
             listItem.classList.add("movie-item");
 
@@ -56,8 +56,9 @@ async function populateData() {
             titleText.textContent = movie.Title;
             titleText.classList.add("movie-title");
 
-            listItem.addEventListener('click', async () => {
+            listItem.addEventListener('click', async () => { //Add event listener for clicking poster/title
                 const details = await getDataID(movie.imdbID);
+                scrollToBottom();
                 showMovieDetails(details);
             });
 
@@ -70,7 +71,6 @@ async function populateData() {
     }
 }
 
-
 function toggleDetails(imdbID) { //Click poster for more details
     let detailsElement = document.getElementById(`details-${imdbID}`);
     if (detailsElement.style.display === 'none' || detailsElement.style.display === '') {
@@ -80,7 +80,7 @@ function toggleDetails(imdbID) { //Click poster for more details
     }
 }
 
-function showMovieDetails(details) {
+function showMovieDetails(details) { //List of details
     const detailsContainer = document.getElementById('movie-details');
     detailsContainer.innerHTML = `
         <h2>${details.Title}</h2>
@@ -92,11 +92,50 @@ function showMovieDetails(details) {
         <p><strong>Released:</strong> ${details.Released}</p>
         <p><strong>Genre:</strong> ${details.Genre}</p>
         <p><strong>Runtime:</strong> ${details.Runtime}</p>
+        <button class="movie-list-button" id="movie-list-button" >Add to My List</button>
     `;
+
+    const listMovies = document.createElement("dt");
+    document.getElementById("movie-list-button").addEventListener('click', async () => { //Add event listener for clicking "Add to List" button
+        addToList(listMovies, details);
+    });
 }
 
+function scrollToBottom(timedelay=0) {
+    var scrollId;
+    var height = 800; //Height to scroll to
+    var minScrollHeight = 10; //Scroll speed
+    scrollId = setInterval(function () {
+        if (height <= document.body.scrollHeight) {
+            window.scrollBy(0, minScrollHeight);
+        }
+        else {
+            clearInterval(scrollId);
+        }
+        height += minScrollHeight;
+    }, timedelay);           
+}
+
+function addToList(listMovies, details) {
+    const personalMovie = document.createElement("dt");
+    personalMovie.textContent = details.Title;
+
+    const movieGenre = document.createElement("dd");
+    movieGenre.textContent = details.Genre;
+
+    const movieDirector = document.createElement("dd");
+    movieDirector.textContent = details.Director;
+
+    personalMovie.appendChild(movieDirector);
+    personalMovie.appendChild(movieGenre);
+    listMovies.appendChild(personalMovie);
+}
 
 //Input for search triggers movie search
 document.getElementById('searchbar').addEventListener('input', async () => {
     await populateData(); 
+});
+
+document.getElementById("my-movies-button").addEventListener('click', async () => { //Use to show list of personal movies, and show recommended (Another page?)
+
 });

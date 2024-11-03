@@ -53,6 +53,8 @@
 
 .contact-form button:hover {
     background-color: #ffae42;
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
 }
 
 /* Social Links (Inside the Form) */
@@ -75,4 +77,6 @@
 
 .contact-form .social-links a:hover {
     background-color: #ffae42;
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
 }

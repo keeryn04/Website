@@ -1,5 +1,6 @@
 .movie-info {
     text-align: center;
+    margin-top: 10px;
 }
 
 .movie-search {
@@ -35,6 +36,38 @@
     flex-direction: column;
     align-items: center;
     max-width: 150px;
+}
+
+.movie-list-button {
+    width: 5%;
+    background-color: #e18402;
+    color: white;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.movie-list-button:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
+}
+
+.my-movies-button {
+    width: 100px;
+    height: 30px;
+    background-color: #ad6a0c;
+    color: white;
+    font-size: large;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.my-movies-button:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
 }
 
 .movie-poster {
