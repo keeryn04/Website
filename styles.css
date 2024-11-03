@@ -58,3 +58,32 @@ a:hover {
     font-size: 0.9em;
     border-top: 1px solid #333;
 }
+
+/* Mobile Styles */
+@media (max-width: 600px) {
+    .header-container {
+        padding: 15px; 
+    }
+
+    .navigation-container {
+        padding: 10px; 
+    }
+
+    .navigation-container a {
+        margin: 0 10px;
+        font-size: 1em; 
+    }
+
+    .footer-container {
+        padding: 8px 0;
+        font-size: 0.8em; 
+    }
+
+    h1 {
+        font-size: 1.5em; 
+    }
+
+    h2 {
+        font-size: 1.2em;
+    }
+}

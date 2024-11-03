@@ -1,3 +1,4 @@
+/* Base Styles (Desktop) */
 .movie-info {
     text-align: center;
     margin-top: 10px;
@@ -54,7 +55,7 @@
 }
 
 .my-movies-button {
-    width: 100px;
+    width: auto;
     height: 30px;
     background-color: #ad6a0c;
     color: white;
@@ -98,3 +99,39 @@
     border-radius: 8px;
 }
 
+/* Mobile Styles */
+@media (max-width: 600px) {
+    .movie-search {
+        width: 90%; 
+        font-size: 1em;
+        margin: 15px auto;
+    }
+
+    #movie-list {
+        gap: 15px; 
+    }
+
+    #movie-list li {
+        max-width: 120px; 
+    }
+
+    .movie-poster {
+        width: 100px; 
+    }
+
+    .movie-title {
+        font-size: 1rem; 
+    }
+
+    .movie-details {
+        padding: 10px; 
+        font-size: 0.9em; 
+    }
+
+    .movie-list-button, .my-movies-button {
+        width: 80%; 
+        font-size: 1em; 
+        margin: 10px auto;
+        padding: 10px 15px;
+    }
+}

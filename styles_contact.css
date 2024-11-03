@@ -80,3 +80,40 @@
     transform: scale(1.05);
     transition: transform 0.3s ease;
 }
+
+/* Mobile Styles */
+@media (max-width: 600px) {
+    .contact-container {
+        padding: 20px; 
+    }
+
+    .contact-form {
+        padding: 20px; 
+        max-width: 90%; 
+    }
+
+    .contact-form label {
+        font-size: 1em; 
+    }
+
+    .contact-form input, .contact-form textarea {
+        padding: 10px; 
+        font-size: 0.9em; 
+        width: 95%;
+    }
+
+    .contact-form button {
+        padding: 1px; 
+        font-size: 1.1em; 
+    }
+
+    .contact-form .social-links {
+        flex-direction: column; 
+        gap: 10px;
+        width: 95%;
+    }
+
+    .contact-form .social-links a {
+        width: 99%;
+    }
+}
