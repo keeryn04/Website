@@ -1,6 +1,6 @@
 async function getData(query) {
     //Fetch response from OMDb API, convert to JSON if good
-    const url = `http://www.omdbapi.com/?s=${query}&apikey=ae4f07db`;
+    const url = `https://www.omdbapi.com/?s=${query}&apikey=ae4f07db`;
     try {
         const response = await fetch(url);
         if (!response.ok) {
@@ -18,7 +18,7 @@ async function getData(query) {
 
 async function getDataID(id) {
     //Fetch response from OMDb API, convert to JSON if good
-    const url = `http://www.omdbapi.com/?i=${id}&apikey=ae4f07db`;
+    const url = `https://www.omdbapi.com/?i=${id}&apikey=ae4f07db`;
     try {
         const response = await fetch(url);
         if (!response.ok) {
@@ -48,7 +48,7 @@ async function populateData() {
             listItem.classList.add("movie-item");
 
             const posterImg = document.createElement("img");
-            posterImg.src = movie.Poster !== "N/A" ? movie.Poster : "../images/no-image-icon.png";
+            posterImg.src = movie.Poster !== "N/A" ? movie.Poster : "images/no-image-icon.png";
             posterImg.alt = `${movie.Title} poster`;
             posterImg.classList.add("movie-poster");
 
@@ -84,7 +84,7 @@ function showMovieDetails(details) { //List of details
     const detailsContainer = document.getElementById('movie-details');
     detailsContainer.innerHTML = `
         <h2>${details.Title}</h2>
-        <img src="${details.Poster !== "N/A" ? details.Poster : "../images/no-image-icon.png"}" alt="${details.Title} poster">
+        <img src="${details.Poster !== "N/A" ? details.Poster : "images/no-image-icon.png"}" alt="${details.Title} poster">
         <p><strong>Director:</strong> ${details.Director}</p>
         <p><strong>Cast:</strong> ${details.Actors}</p>
         <p><strong>Plot:</strong> ${details.Plot}</p>
