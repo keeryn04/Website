@@ -1,3 +1,5 @@
+let personalMovieList = [];
+
 async function getData(query) {
     //Fetch response from OMDb API, convert to JSON if good
     const url = `https://www.omdbapi.com/?s=${query}&apikey=ae4f07db`;
@@ -95,9 +97,13 @@ function showMovieDetails(details) { //List of details
         <button class="movie-list-button" id="movie-list-button" >Add to My List</button>
     `;
 
-    const listMovies = document.createElement("dt");
-    document.getElementById("movie-list-button").addEventListener('click', async () => { //Add event listener for clicking "Add to List" button
-        addToList(listMovies, details);
+    document.getElementById("movie-list-button").addEventListener('click', async () => { //Event listener for adding to list
+        if (!personalMovieList.some(movie => movie.imdbID === details.imdbID)) {  //Check imdbID if already in list
+            personalMovieList.push(details);
+            document.getElementById("movie-list-button").textContent = "Added!"; 
+        } else {
+            document.getElementById("movie-list-button").textContent = "Already Added"; 
+        }
     });
 }
 
@@ -116,19 +122,27 @@ function scrollToBottom(timedelay=0) {
     }, timedelay);           
 }
 
-function addToList(listMovies, details) {
-    const personalMovie = document.createElement("dt");
-    personalMovie.textContent = details.Title;
+function displayPersonalList() {
+    const personalListContainer = document.getElementById('personal-movie-list');
+    personalListContainer.innerHTML = '';
 
-    const movieGenre = document.createElement("dd");
-    movieGenre.textContent = details.Genre;
+    personalMovieList.forEach(movie => {
+        const movieItem = document.createElement("li");
+        movieItem.classList.add("personal-movie-item");
 
-    const movieDirector = document.createElement("dd");
-    movieDirector.textContent = details.Director;
+        const posterImg = document.createElement("img");
+        posterImg.src = movie.Poster !== "N/A" ? movie.Poster : "images/no-image-icon.png";
+        posterImg.alt = `${movie.Title} poster`;
+        posterImg.classList.add("movie-poster");
 
-    personalMovie.appendChild(movieDirector);
-    personalMovie.appendChild(movieGenre);
-    listMovies.appendChild(personalMovie);
+        const titleText = document.createElement("p");
+        titleText.textContent = movie.Title;
+        titleText.classList.add("movie-title");
+
+        movieItem.appendChild(posterImg);
+        movieItem.appendChild(titleText);
+        personalListContainer.appendChild(movieItem);
+    });
 }
 
 //Input for search triggers movie search
@@ -136,6 +150,18 @@ document.getElementById('searchbar').addEventListener('input', async () => {
     await populateData(); 
 });
 
-document.getElementById("my-movies-button").addEventListener('click', async () => { //Use to show list of personal movies, and show recommended (Another page?)
+document.getElementById('my-movies-button').addEventListener('click', () => {
+    const personalListContainer = document.getElementById('personal-movie-list');
+    const movieOptionsContainer = document.getElementById('movie-list');
 
+    if (personalListContainer.style.display == 'none') {
+        personalListContainer.style.display = 'flex'
+        movieOptionsContainer.style.display = 'none'
+        document.getElementById('my-movies-button').textContent = "Hide List";
+        displayPersonalList();
+    } else {
+        personalListContainer.style.display = 'none'
+        movieOptionsContainer.style.display = 'flex'
+        document.getElementById('my-movies-button').textContent = "My Movie List";
+    }
 });
