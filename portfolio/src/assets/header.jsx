@@ -1,9 +1,9 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from "react-router";
+import '../styles/navbar.css'
 
-function Navbar() {
+function Header() {
     return (
-        <nav>
+        <nav className="navbar">
           <ul>
             <li><Link to="/">Home</Link></li>
             <li><Link to="/about">About</Link></li>
@@ -13,4 +13,4 @@ function Navbar() {
       );
 }
 
-export default Navbar
+export default Header

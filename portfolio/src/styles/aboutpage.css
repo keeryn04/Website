@@ -1,0 +1,56 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #E5B25D;
+    color: #5A3E36;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+}
+
+.about-me {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    gap: 20px;
+    max-width: 900px;
+    width: 100%;
+    margin: auto;
+    background-color: #f3bc7a;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.my-portrait {
+    width: 500px;
+    border-radius: 10%;
+    border: 3px solid #8B5E3B;
+    object-fit: cover;
+}
+
+.about-me-title {
+    font-size: 1.8rem;
+    color: #8B5E3B;
+}
+
+.about-me p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    max-width: 600px;
+}
+
+@media (max-width: 768px) {
+    .about-me {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .my-portrait {
+        width: 80%;
+        max-width: 300px;
+    }
+}
