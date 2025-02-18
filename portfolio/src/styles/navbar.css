@@ -1,5 +1,8 @@
 .navbar {
-  background-color: #D9A066;
+  background: #B87D4B;
+  background: -moz-linear-gradient(top, #B87D4B 0%, #E5B25D 100%);
+  background: -webkit-linear-gradient(top, #B87D4B 0%, #E5B25D 100%);
+  background: linear-gradient(to bottom, #B87D4B 0%, #E5B25D 100%);
   padding: 15px;
   border-radius: 0;
   width: 100%;

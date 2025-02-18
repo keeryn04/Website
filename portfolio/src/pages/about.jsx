@@ -1,4 +1,4 @@
-import portrait from '../images/me.jpg';
+import portrait from '/images/me.jpg';
 import '../styles/aboutpage.css';
 
 function AboutPage() {

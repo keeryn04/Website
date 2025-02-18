@@ -1,6 +1,7 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";import HomePage from "./pages/home";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Workpage from "./pages/work";
 import AboutPage from "./pages/about";
-import ProjectPage from "./pages/projects";
+import ContactPage from "./pages/contact";
 import Header from "./assets/header";
 
 function App() {
@@ -9,9 +10,9 @@ function App() {
     <BrowserRouter>
       <Header />
       <Routes>
-        <Route path="/" element={<HomePage />} />
+        <Route path="/" element={<Workpage />} />
         <Route path="/about" element={<AboutPage />} />
-        <Route path="/projects" element={<ProjectPage />} />
+        <Route path="/contact" element={<ContactPage />} />
       </Routes>
     </BrowserRouter>
   );

@@ -1,0 +1,6 @@
+.footer {
+    background: #E5B25D;
+    background: -moz-linear-gradient(top, #E5B25D 0%, #000000 100%);
+    background: -webkit-linear-gradient(top, #E5B25D 0%, #000000 100%);
+    background: linear-gradient(to bottom, #E5B25D 0%, #000000 100%);
+}
